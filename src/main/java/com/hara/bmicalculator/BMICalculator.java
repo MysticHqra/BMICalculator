@@ -42,6 +42,7 @@ public class BMICalculator extends Application {
 
         l3 = new Label("Age");
         cb = new ComboBox();
+        cb.setPromptText("Select");
         cb.getItems().add("2-17");
         cb.getItems().add("18-30");
         cb.getItems().add("31-50");
@@ -85,6 +86,7 @@ public class BMICalculator extends Application {
         int age = 0;
         String category = "";
         boolean flag = true;
+
         try {
             weight = Double.parseDouble(tf1.getText());
             height = Double.parseDouble(tf2.getText());
@@ -108,26 +110,30 @@ public class BMICalculator extends Application {
             alertBox.show();
         }
 
-        double bmi = (weight / (height * height)) * 703;
-
-        if (bmi >= 16.0) {
-            if (bmi >= 16.0 && bmi <= 18.4) {
-                category = "Underweight";
-            } else if (bmi >= 18.5 && bmi <= 24.9) {
-                category = "Normal";
-            } else if (bmi >= 25.0 && bmi <= 29.9) {
-                category = "Overweight";
-            } else {
-                category = "Obese";
-            }
-        } else {
-            category = "Critical";
-        }
         if (flag) {
+            double bmi = (weight / (height * height)) * 703;
+
+            if (bmi >= 16.0) {
+                if (bmi >= 16.0 && bmi <= 18.4) {
+                    category = "Underweight";
+                } else if (bmi >= 18.5 && bmi <= 24.9) {
+                    category = "Normal";
+                } else if (bmi >= 25.0 && bmi <= 29.9) {
+                    category = "Overweight";
+                } else {
+                    category = "Obese";
+                }
+            } else {
+                category = "Critical";
+            }
+
             Alert alertBox = new Alert(Alert.AlertType.INFORMATION);
+            alertBox.setHeaderText("Your BMI");
             alertBox.setContentText("Your BMI is :" + bmi + "\nCategory: " + category);
             alertBox.show();
         }
+
+
     }
 
     public void clearFields() {
